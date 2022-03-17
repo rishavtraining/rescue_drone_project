@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------------
+
+1. 	flashed raspberry pi OS into sd card and updated os
+2.	installed miniconda on raspberry pi
+3.	installed all required packages
+4.	Interfaced rpi with Flight controller
+
+---------------------------------------------------------------------------------------
+
+Refrence :- links of refrences used in project
+
+1.[Pre-installed and Pre-configured Raspbian with OpenCV 4.1.0. for Raspberry Pi 3 model B / B+.
+](https://medium.com/@aadeshshah/pre-installed-and-pre-configured-raspbian-with-opencv-4-1-0-for-raspberry-pi-3-model-b-b-9c307b9a993a)
+
+2.[connecting-the-apm2](https://ardupilot.org/copter/docs/connecting-the-apm2.html)
+
+3.[raspberry-pi-via-mavlink](https://ardupilot.org/dev/docs/raspberry-pi-via-mavlink.html)

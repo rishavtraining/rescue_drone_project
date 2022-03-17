@@ -1,0 +1,60 @@
+COM4-1-QUADROTOR
+1200
+2400
+4800
+9600
+19200
+38400
+57600
+111100
+115200
+500000
+625000
+921600
+1500000
+
+
+=========================================
+root@champ:/home/pi# mavproxy.py
+Auto-detected serial ports are:
+/dev/ttyS0
+Connecting to /dev/ttyS0
+Connect /dev/ttyS0 source_system=255
+Log Directory:
+Telemetry log: mav.tlog
+MAV> Waiting for heartbeat from /dev/ttyS0
+~~~~~~~~~~~~?~?~~~~~~?~~~~~?~root@champ:/home/pi# clear
+root@champ:/home/pi# mavproxy.py --master=/dev/ttys0 --baudrate 9600 --aircraft MyCopter
+Connect /dev/ttys0 source_system=255
+Failed to connect to /dev/ttys0 : [Errno 2] could not open port /dev/ttys0: [Errno 2] No such file or directory: '/dev/ttys0'
+root@champ:/home/pi# mavproxy.py
+Auto-detected serial ports are:
+/dev/ttyS0
+Connecting to /dev/ttyS0
+Connect /dev/ttyS0 source_system=255
+Log Directory:
+Telemetry log: mav.tlog
+MAV> Waiting for heartbeat from /dev/ttyS0
+~~root@champ:/home/pi# mavproxy.py --master=/dev/ttyS0 --baudrate 9600 --aircraft MyCopter
+Connect /dev/ttys0S0 source_system=255
+Failed to connect to /dev/ttys0S0 : [Errno 2] could not open port /dev/ttys0S0: [Errno 2] No such file or directory: '/dev/ttys0S0'
+root@champ:/home/pi# mavproxy.py --master=/dev/ttyS0 --baudrate 9600 --aircraft MyCopter
+Connect /dev/ttyS0 source_system=255
+no script MyCopter/mavinit.scr
+Log Directory: MyCopter/logs/2021-03-17/flight11
+Telemetry log: MyCopter/logs/2021-03-17/flight11/flight.tlog
+MAV> Waiting for heartbeat from /dev/ttyS0
+online system 1
+RTL> Mode RTL
+fence breach
+sOAPM: Frame: QUAD
+Received 306 parameters
+Saved 306 parameters to MyCopter/logs/2021-03-17/flight11/mav.parm
+.Z>J!!!3!!!rM*j~!!      6 Z2 Z<_R?=w    @ZKVYTk0!t*wg`Z"d*o:*JX =h
+:m7Z}6\C9^CffP
+.@ c9@i!!!2S/H&MYsE]CffHe~OJ[.@ c9T:@9\C#^2C`*"
+QY*Mc9E9:$+j#>F>+\CG&GZ'L9:!9V*f#6*zPHroot@champ:/home/pi#
+
+===================================================================
+
+

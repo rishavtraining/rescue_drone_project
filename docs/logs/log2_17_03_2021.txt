@@ -1,0 +1,109 @@
+root@champ:/home/pi# mavproxy.py --master=/dev/ttyS0 --baudrate 9600 --aircraft                                                                                                              MyCopter
+Connect /dev/ttyS0 source_system=255
+no script MyCopter/mavinit.scr
+Log Directory: MyCopter/logs/2021-03-17/flight21
+Telemetry log: MyCopter/logs/2021-03-17/flight21/flight.tlog
+MAV> Waiting for heartbeat from /dev/ttyS0
+root@champ:/home/pi# exit
+pi@champ:~ $ clear
+pi@champ:~ $ sudo -s
+root@champ:/home/pi# mavproxy.py --master=/dev/ttyS0 --baudrate 115200 --aircraf                                                                                                             t MyCopter
+Connect /dev/ttyS0 source_system=255
+no script MyCopter/mavinit.scr
+Log Directory: MyCopter/logs/2021-03-17/flight22
+Telemetry log: MyCopter/logs/2021-03-17/flight22/flight.tlog
+MAV> Waiting for heartbeat from /dev/ttyS0
+online system 1
+RTL> Mode RTL
+APM: ArduCopter V3.2.1 (36b405fb)
+APM: Frame: QUAD
+APM: PreArm: Need 3D Fix
+Received 306 parameters
+Saved 306 parameters to MyCopter/logs/2021-03-17/flight22/mav.parm
+fence breach
+APM: PreArm: Need 3D Fix
+APM: PreArm: Need 3D Fix
+arm throttle
+RTL> APM: PreArm: Need 3D Fix
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 3}
+APM: PreArm: Need 3D Fix
+arm throttle
+RTL> APM: PreArm: Need 3D Fix
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 3}
+param show ARMING CHECK
+RTL> APM: PreArm: Need 3D Fix
+APM: PreArm: Need 3D Fix
+param show ARMING CHECK
+RTL> arm throttle
+RTL> APM: PreArm: Need 3D Fix
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 3}
+APM: PreArm: Need 3D Fix
+APM: PreArm: Need 3D Fix
+APM: PreArm: Need 3D Fix
+ ublox APM: PreArm: Need 3D Fix
+arm throttle
+RTL> APM: PreArm: Need 3D Fix
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 3}
+APM: PreArm: Need 3D Fix
+APM: PreArm: Need 3D Fix
+GPS lock at 1 meters
+APM: PreArm: Bad Velocity
+paramarm throttle
+RTL> APM: PreArm: High GPS HDOP
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 3}
+arm throttle
+RTL> APM: PreArm: High GPS HDOP
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 3}
+arm tAPM: PreArm: High GPS HDOP
+param show ARMING CHECK
+RTL> APM: PreArm: High GPS HDOP
+APM: PreArm: High GPS HDOP
+APM: PreArm: High GPS HDOP
+APM: PreArm: Bad Velocity
+param show ARMING CHECK
+RTL> arm throttle
+RTL> APM: PreArm: High GPS HDOP
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 3}
+STABILIZE> Mode STABILIZE
+APM: GROUND START
+Init GyroAPM: Initialising APM...
+**APM: Calibrating barometer
+APM: barometer calibration complete
+ARMED
+DISARMED
+APM: Calibrating barometer
+APM: barometer calibration complete
+APM: Initialising APM...
+ARMED
+DISARMED
+GPS fix lost
+GPS OK
+paramarm throttle
+STABILIZE> APM: Calibrating barometer
+APM: barometer calibration complete
+APM: Initialising APM...
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 0}
+ARMED
+DISARMED
+GPS fix lost
+GPS OK
+GPS fix lost
+GPS OK
+GPS fix lost
+GPS OK
+STABILIZE> arm throttle
+STABILIZE> APM: Calibrating barometer
+APM: barometer calibration complete
+APM: Initialising APM...
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 0}
+ARMED
+DISARMED
+arm throttle
+STABILIZE> APM: Calibrating barometer
+APM: barometer calibration complete
+APM: Initialising APM...
+Got MAVLink msg: COMMAND_ACK {command : 400, result : 0}
+ARMED
+DISARMED
+GPS fix lost
+GPS OK

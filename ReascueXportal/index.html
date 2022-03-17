@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RescueXportal</title>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <img src="banner.png" class="img-fluid" alt="Responsive image">
+    <!-- Grey with black text -->
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+      <button
+        type="button"
+        class="navbar-toggler"
+        data-toggle="collapse"
+        data-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+          <a href="#" class="nav-item nav-link active">Home</a>
+          <a href="#" class="nav-item nav-link active">Nearest Shelters</a>
+          <a href="#" class="nav-item nav-link active">Emergency Services</a>
+          <a href="#" class="nav-item nav-link active" tabindex="-1"
+            >Alerts & Warnings</a
+          >
+        </div>
+        <div class="navbar-nav ml-auto">
+          <a href="#" class="nav-item nav-link active">Github</a>
+        </div>
+      </div>
+    </nav>
+
+    <!----Alerts-->
+    <div id="alerts">
+      <div class="alert alert-danger">
+        <strong>Danger!</strong> Flooding is possible - be prepared
+      </div>
+      <div class="alert alert-warning">
+        <strong>Warnings!</strong> Severe flooding - danger to life
+      </div>
+      <div class="alert alert-primary">
+        <strong>Alerts!</strong> Flooding is expected - immediate action
+        required
+      </div>
+    </div>
+
+    <!--data for rescue team-->
+    <div class="container">
+      <h2>Rescue Portal Location Database</h2>
+      <p>eYIC2020-21 Team Fury's DroneProject</p>
+
+    <!--firebase database-->
+
+    <link rel="icon" href="assets/SGT.jpg" />
+    <link
+      rel="stylesheet"
+      href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+    />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+    <!--<script src="script.js"></script>-->
+    <div class="container">
+      <div class="row">
+        <div class="student-list-container col-sm-9">
+          <table id="student-table" class="student-list table table-striped">
+            <thead>
+              <tr>
+                <th></th>
+                <th>latitude</th>
+                <th>longitude</th>
+                <th>time</th>
+                <th>people</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(function ($) {
+        /** Create Operations ======================
+         *
+         */
+        var submitBtn = $("#add-student-btn"),
+          sgtTableElement = $("#student-table"),
+          firebaseRef = new Firebase(
+            "https://rescuex-default-rtdb.firebaseio.com/1jmIpcy7ZP8uxjAndMavH-yCsRj1pbzoyuwf_ekiW45k/World_Airports/"
+          );
+
+        /** Click handler to submit student information
+         * Take values of the student-add-form
+         */
+        submitBtn.click(function () {
+          var droneID = $("#s-id-input").val(),
+            droneLatitude = $("#s-latitude-input").val(),
+            droneLongitude = $("#s-longitude-input").val();
+          droneTime = $("#s-time-input").val();
+          dronePeople = $("#s-People-input").val();
+
+          /** Send the values to firebase
+           * firebaseRef.push will append a new item to the user list
+           */
+          firebaseRef.push({
+            id: droneID,
+            latitude: droneLatitude,
+            longitude: droneLongitude,
+            time: droneTime,
+            people: dronePeople,
+          });
+          clearInputs();
+        });
+
+        /** Read Operations ======================
+         * Attach an asynchronous callback to read the data at our users firebaseReference on load
+         * child_added will update the DOM everytime a new student is added to the data base
+         */
+        firebaseRef.on(
+          "child_added",
+          function (studentSnapShot) {
+            updateDOM(studentSnapShot);
+          },
+          function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
+          }
+        );
+
+        firebaseRef.on(
+          "child_changed",
+          function (studentSnapShot) {
+            updateDOM(studentSnapShot);
+          },
+          function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
+          }
+        );
+
+        /** Update Operations ======================
+         * Click handler to update student data and send to firebase
+         * Get the unique id of any student
+         */
+
+        /** Edit button handler */
+        sgtTableElement.on("click", ".edit-btn", function () {
+          var student_id = $(this).data("id");
+          var studentFirebaseRef = firebaseRef.child(student_id);
+
+          studentFirebaseRef.once("value", function (snapshot) {
+            $("#modal-edit-id").val(snapshot.val().id);
+            $("#modal-edit-latitude").val(snapshot.val().latitude);
+            $("#modal-edit-longitude").val(snapshot.val().longitude);
+            $("#modal-edit-time").val(snapshot.val().time);
+            $("#modal-edit-people").val(snapshot.val().people);
+
+            $("#student-id").val(student_id);
+
+            console.log(
+              "$('#student-id').val(student_id) : ",
+              $("#student-id").val(student_id)
+            );
+
+            $("#edit-modal").modal("show");
+          });
+        });
+
+        /** DOM CREATION ================================== */
+        function updateDOM(studentSnapShot) {
+          var studentObject = studentSnapShot.val();
+          var studentObjectId = studentSnapShot.key();
+          var studentRow = $("#" + studentObjectId);
+          if (studentRow.length > 0) {
+            //change current
+            studentRow.find(".student-id").text(studentObject.id);
+            studentRow.find(".student-latitude").text(studentObject.latitude);
+            studentRow.find(".student-longitude").text(studentObject.longitude);
+            studentRow.find(".student-time").text(studentObject.time);
+            studentRow.find(".student-people").text(studentObject.people);
+          } else {
+            //add new
+            var sid = $("<td>", {
+                text: studentObject.id,
+                class: "student-id",
+              }),
+              slatitude = $("<td>", {
+                text: studentObject.latitude,
+                class: "student-latitide",
+              }),
+              slongitude = $("<td>", {
+                text: studentObject.longitude,
+                class: "student-longitude",
+              }),
+              stime = $("<td>", {
+                text: studentObject.time,
+                class: "student-time",
+              }),
+              speople = $("<td>", {
+                text: studentObject.people,
+                class: "student-people",
+              }),
+              /* Each student gets a unique edit and delete button appended to its row */
+              sEditBtn = $("<button>", {
+                class: "btn btn-info edit-btn",
+                "data-id": studentObjectId,
+              }),
+              sEditBtnIcon = $("<span>", {
+                class: "glyphicon glyphicon-pencil",
+              }),
+              sDeleteBtn = $("<button>", {
+                class: "btn btn-danger delete-btn",
+                "data-id": studentObjectId,
+              }),
+              sDeleteBtnIcon = $("<span>", {
+                class: "glyphicon glyphicon-remove",
+              });
+
+            var studentRow = $("<tr>", {
+              id: studentObjectId,
+            });
+            sEditBtn.append(sEditBtnIcon);
+            sDeleteBtn.append(sDeleteBtnIcon);
+            studentRow.append(sid, slatitude, slongitude, stime, speople);
+            sgtTableElement.append(studentRow);
+          }
+        }
+      });
+    </script>
+    <!--//firebase database-->
+  </body>
+</html>
